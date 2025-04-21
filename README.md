@@ -23,6 +23,7 @@ Typing `@today` <kbd>Enter</kbd> will automatically be expanded to the current d
 | Setting         | Description                                             | Default |
 | --------------- | ------------------------------------------------------- | ------- |
 | Enable/Disable  | A global toggle to enable or disable the autosuggest    | Enabled |
+| Prefix phrase | Characters(s) added to the beginning of a date suggestion | `time:` or `#`  | 
 | Trigger phrase  | Character(s) required to open the autosuggest           | `@`     |
 | Insert as link? | Dates will be inserted as wikilinks (i.e. `[[<date>]]`) | Yes     |
 

@@ -100,6 +100,7 @@ export default class DateSuggest extends EditorSuggest<IDateCompletion> {
     const includeAlias = event.shiftKey;
     let dateStr = "";
     let makeIntoLink = this.plugin.settings.autosuggestToggleLink;
+    let datePrefix = this.plugin.settings.autocompletePrefixPhrase;
 
     if (suggestion.label.startsWith("time:")) {
       const timePart = suggestion.label.substring(5);
@@ -109,6 +110,10 @@ export default class DateSuggest extends EditorSuggest<IDateCompletion> {
       dateStr = this.plugin.parseDate(suggestion.label).formattedString;
     }
 
+    if (datePrefix) {
+      dateStr = datePrefix + " " + dateStr;
+    }
+    
     if (makeIntoLink) {
       dateStr = generateMarkdownLink(
         this.app,

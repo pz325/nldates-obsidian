@@ -15,6 +15,7 @@ export type DayOfWeek =
 export interface NLDSettings {
   autosuggestToggleLink: boolean;
   autocompleteTriggerPhrase: string;
+  autocompletePrefixPhrase: string;
   isAutosuggestEnabled: boolean;
 
   format: string;
@@ -30,6 +31,7 @@ export interface NLDSettings {
 export const DEFAULT_SETTINGS: NLDSettings = {
   autosuggestToggleLink: true,
   autocompleteTriggerPhrase: "@",
+  autocompletePrefixPhrase: "",
   isAutosuggestEnabled: true,
 
   format: "YYYY-MM-DD",
@@ -161,6 +163,21 @@ export class NLDSettingsTab extends PluginSettingTab {
           .setValue(this.plugin.settings.autosuggestToggleLink)
           .onChange(async (value) => {
             this.plugin.settings.autosuggestToggleLink = value;
+            await this.plugin.saveSettings();
+          })
+      );
+
+    new Setting(containerEl)
+      .setName("Prefix")
+      .setDesc(
+        "Characters(s) that will be added before the date, which can be used for formatting"
+      )
+      .addMomentFormat((text) =>
+        text
+          .setPlaceholder(DEFAULT_SETTINGS.autocompletePrefixPhrase)
+          .setValue(this.plugin.settings.autocompletePrefixPhrase || "")
+          .onChange(async (value) => {
+            this.plugin.settings.autocompletePrefixPhrase = value.trim();
             await this.plugin.saveSettings();
           })
       );
